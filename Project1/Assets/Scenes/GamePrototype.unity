@@ -204,7 +204,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1829563271}
         m_TargetAssemblyTypeName: GameController, Assembly-CSharp
-        m_MethodName: NextTurn
+        m_MethodName: EndTurn
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1204,7 +1204,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06b5a709ec202894da3a4d5bba70c683, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameController: {fileID: 1829563271}
 --- !u!114 &1105490604
 MonoBehaviour:
   m_ObjectHideFlags: 0

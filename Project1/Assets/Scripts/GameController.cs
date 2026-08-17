@@ -6,85 +6,90 @@ public class GameController : MonoBehaviour
 {
     public List<Player> players;
     public TurnManager turnManager;
+
     private int currRound = 1;
 
     private void Start()
     {
         CreatePlayersWithRandomRoles();
+
         turnManager = new TurnManager(players);
+
         StartGame();
     }
 
     private void CreatePlayersWithRandomRoles()
     {
-        players= new List<Player>();
+        players = new List<Player>();
+
         List<RoleType> roles =
-           new List<RoleType>((RoleType[])Enum.GetValues(typeof(RoleType)));
+            new List<RoleType>(
+                (RoleType[])Enum.GetValues(typeof(RoleType)));
 
         Shuffle(roles);
+
         for (int i = 0; i < 6; i++)
         {
             players.Add(new Player(i, roles[i]));
         }
     }
 
-    // Start of the game
     public void StartGame()
     {
         Debug.Log("=== GAME START ===");
 
-        foreach(Player player in players)
+        foreach (Player player in players)
         {
-            Debug.Log($"Player {player.Id} | Role: {player.Role}");
+            Debug.Log(
+                $"Player {player.Id} | Role: {player.Role}");
         }
 
         Debug.Log($"=== ROUND {currRound} START ===");
-        NextTurn();
+
+        StartTurn();
     }
 
-    //The begining of the turn
-    public void NextTurn()
+    private void StartTurn()
     {
         Player player = turnManager.Current;
-        Debug.Log($"This is {player.Id}'s turn.");
-        MakeAction(player);
-    }
-    
-    //Player makes an action
-    public void MakeAction(Player player)
-    {
-        Debug.Log($"{player.Id}, what do you want to do?");
 
-        EndTurn();
+        Debug.Log($"This is Player {player.Id}'s turn.");
     }
 
-    //The ending of the turn
     public void EndTurn()
     {
-        Debug.Log("The end of the turn");
+        Debug.Log(
+            $"Player {turnManager.Current.Id} ended the turn.");
 
         bool isRoundOver = turnManager.Next();
-        if(isRoundOver) {
+
+        if (isRoundOver)
+        {
             EndRound();
-        } else {
-            NextTurn();
+            return;
         }
+
+        StartTurn();
     }
 
-    //The ending of the round
-    public void EndRound()
+    private void EndRound()
     {
-        Debug.Log($"The end of the {currRound} round");
-            currRound++;
+        Debug.Log($"=== ROUND {currRound} END ===");
+
+        currRound++;
+
         Debug.Log($"=== ROUND {currRound} START ===");
-        NextTurn();
+
+        StartTurn();
     }
 
     private void Shuffle(List<RoleType> list)
     {
         for (int i = 0; i < list.Count; i++)
         {
-            int randomIndex = UnityEngine.Random.Range(i, list.Count);
+            int randomIndex =
+                UnityEngine.Random.Range(i, list.Count);
+
             (list[i], list[randomIndex]) = (list[randomIndex], list[i]);
         }
     }
