@@ -12,9 +12,11 @@ public class TurnManager
 
     public Player Current => players[currentIndex];
 
-    public Player Next()
+    public bool Next()
     {
+        bool isRoundOver = (currentIndex == players.Count - 1);
+        
         currentIndex = (currentIndex + 1) % players.Count;
-        return Current;
+        return isRoundOver;
     }
 }
