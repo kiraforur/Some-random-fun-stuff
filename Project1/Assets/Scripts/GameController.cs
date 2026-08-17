@@ -28,6 +28,7 @@ public class GameController : MonoBehaviour
         }
     }
 
+    // Start of the game
     public void StartGame()
     {
         Debug.Log("=== GAME START ===");
@@ -40,6 +41,8 @@ public class GameController : MonoBehaviour
         Debug.Log($"=== ROUND {currRound} START ===");
         NextTurn();
     }
+
+    //The begining of the turn
     public void NextTurn()
     {
         Player player = turnManager.Current;
@@ -47,6 +50,7 @@ public class GameController : MonoBehaviour
         MakeAction(player);
     }
     
+    //Player makes an action
     public void MakeAction(Player player)
     {
         Debug.Log($"{player.Id}, what do you want to do?");
@@ -54,6 +58,7 @@ public class GameController : MonoBehaviour
         EndTurn();
     }
 
+    //The ending of the turn
     public void EndTurn()
     {
         Debug.Log("The end of the turn");
@@ -66,11 +71,12 @@ public class GameController : MonoBehaviour
         }
     }
 
+    //The ending of the round
     public void EndRound()
     {
         Debug.Log($"The end of the {currRound} round");
             currRound++;
-        Debug.Log($"=== ROUND {currRound} START ==="
+        Debug.Log($"=== ROUND {currRound} START ===");
         NextTurn();
     }
 
