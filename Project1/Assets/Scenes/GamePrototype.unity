@@ -204,7 +204,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1829563271}
         m_TargetAssemblyTypeName: GameController, Assembly-CSharp
-        m_MethodName: EndTurn
+        m_MethodName: OnNextTurnButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1259,7 +1259,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1105490605}
   - component: {fileID: 1105490604}
-  - component: {fileID: 1105490603}
   m_Layer: 0
   m_Name: CameraSystem
   m_TagString: Untagged
@@ -1267,18 +1266,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1105490603
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1105490602}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06b5a709ec202894da3a4d5bba70c683, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1105490604
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1778,6 +1765,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef35c0a3f4de1c147a402418121395e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nextTurnButton: {fileID: 104471507}
 --- !u!4 &1829563272
 Transform:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections.Generic;
 using System;
 
@@ -11,6 +12,7 @@ public class GameController : MonoBehaviour
     private int currRound = 1;
     private BoardState boardState;
 
+    [SerializeField] private Button nextTurnButton;
     private void Start()
     {
         CreatePlayersWithRandomRoles();
@@ -75,6 +77,14 @@ public class GameController : MonoBehaviour
         Player player = turnManager.Current;
 
         Debug.Log($"This is Player {player.Id}'s turn.");
+        MakeAction();
+    }
+
+    public void MakeAction()
+    {
+        Debug.Log($"Player {turnManager.Current.Id} makes an action.");
+
+        nextTurnButton.gameObject.SetActive(true);
     }
 
     public void EndTurn()
@@ -99,6 +109,12 @@ public class GameController : MonoBehaviour
 
         currRound++;
 
+        if(currRound > 3)
+        {
+            Debug.Log("End game");
+            return;
+        }
+
         Debug.Log($"=== ROUND {currRound} START ===");
 
         StartTurn();
@@ -113,6 +129,13 @@ public class GameController : MonoBehaviour
 
             (list[i], list[randomIndex]) = (list[randomIndex], list[i]);
         }
+    }
+
+    public void OnNextTurnButtonClick()
+    {
+        nextTurnButton.gameObject.SetActive(true);
+
+        EndTurn();
     }
 
     private BoardState CreateBoard()
