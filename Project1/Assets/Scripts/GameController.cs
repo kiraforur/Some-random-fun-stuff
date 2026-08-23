@@ -133,7 +133,7 @@ public class GameController : MonoBehaviour
 
     public void OnNextTurnButtonClick()
     {
-        nextTurnButton.gameObject.SetActive(true);
+        nextTurnButton.gameObject.SetActive(false);
 
         EndTurn();
     }

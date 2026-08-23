@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 104471508}
   - component: {fileID: 104471507}
   m_Layer: 5
-  m_Name: NextTurmButton
+  m_Name: NextTurnButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
