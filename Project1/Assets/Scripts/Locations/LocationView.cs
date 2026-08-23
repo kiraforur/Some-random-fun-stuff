@@ -20,8 +20,8 @@ public class LocationView : MonoBehaviour,
     [SerializeField]
     private Color selectedColor = Color.yellow;
 
-    private Renderer objectRenderer;
-    private Color defaultColor;
+    private Renderer[] renderers;
+    private Color[] defaultColors;
 
     private bool isSelected;
 
@@ -32,20 +32,20 @@ public class LocationView : MonoBehaviour,
 
     private void Awake()
     {
-        objectRenderer = GetComponent<Renderer>();
+        renderers = GetComponentsInChildren<Renderer>();
 
-        if (objectRenderer != null)
+        defaultColors = new Color[renderers.Length];
+
+        for (int i = 0; i < renderers.Length; i++)
         {
-            defaultColor = objectRenderer.material.color;
+            defaultColors[i] = renderers[i].material.color;
         }
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (isSelected)
-        {
             return;
-        }
 
         SetColor(hoverColor);
     }
@@ -53,11 +53,9 @@ public class LocationView : MonoBehaviour,
     public void OnPointerExit(PointerEventData eventData)
     {
         if (isSelected)
-        {
             return;
-        }
 
-        SetColor(defaultColor);
+        ResetColor();
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -69,20 +67,25 @@ public class LocationView : MonoBehaviour,
     {
         isSelected = selected;
 
-        SetColor(
-            selected
-                ? selectedColor
-                : defaultColor
-        );
+        if (selected)
+            SetColor(selectedColor);
+        else
+            ResetColor();
     }
 
     private void SetColor(Color color)
     {
-        if (objectRenderer == null)
+        foreach (Renderer renderer in renderers)
         {
-            return;
+            renderer.material.color = color;
         }
+    }
 
-        objectRenderer.material.color = color;
+    private void ResetColor()
+    {
+        for (int i = 0; i < renderers.Length; i++)
+        {
+            renderers[i].material.color = defaultColors[i];
+        }
     }
 }

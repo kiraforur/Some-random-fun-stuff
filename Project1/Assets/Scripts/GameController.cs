@@ -2,12 +2,14 @@ using UnityEngine;
 using System.Collections.Generic;
 using System;
 
+
 public class GameController : MonoBehaviour
 {
     public List<Player> players;
     public TurnManager turnManager;
 
     private int currRound = 1;
+    private BoardState boardState;
 
     private void Start()
     {
@@ -45,6 +47,25 @@ public class GameController : MonoBehaviour
         }
 
         Debug.Log($"=== ROUND {currRound} START ===");
+
+        /*Location port =
+            LocationFactory.Create(
+                0,
+                LocationType.Port
+        );
+
+        Location market =
+            LocationFactory.Create(
+                1,
+                LocationType.Market
+            );
+
+        Location citadel =
+            LocationFactory.Create(
+                2,
+                LocationType.Citadel
+            ); */ // then move this part into container
+        boardState = CreateBoard();
 
         StartTurn();
     }
@@ -93,4 +114,28 @@ public class GameController : MonoBehaviour
             (list[i], list[randomIndex]) = (list[randomIndex], list[i]);
         }
     }
+
+    private BoardState CreateBoard()
+    {
+        BoardState board = new BoardState();
+
+        board.AddLocation(
+            LocationFactory.Create(
+                0,
+                LocationType.Port));
+
+        board.AddLocation(
+            LocationFactory.Create(
+                1,
+                LocationType.Market));
+
+        board.AddLocation(
+            LocationFactory.Create(
+                2,
+                LocationType.Citadel));
+
+        return board;
+    }
 }
+
+
