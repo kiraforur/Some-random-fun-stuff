@@ -9,7 +9,7 @@ namespace UI
         public Image healthBar;
         [SerializeField] private PlayerHealth playerHealth;
 
-        private void OnEnable()
+        private void Start()
         {
             var health = playerHealth.GetHealth();
             health.OnHealthChanged += UpdateHealth;

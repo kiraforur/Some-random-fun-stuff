@@ -4,10 +4,10 @@ using UnityEngine;
 public class AttackData : ScriptableObject
 {
     [SerializeField] private int damage;
-    [SerializeField] private string animationName;
-    [SerializeField] private AttackContext attackType;
+    [SerializeField] private AnimationClip animation;
+    [SerializeField] private float _frameWindow;
+    
 
     public int Damage => damage;
-    public string AnimationName => animationName;
-    public AttackContext AttackType => attackType;
+    public float FrameWindow => _frameWindow;
 }

@@ -6,16 +6,16 @@ namespace Command
 {
     public class JumpCommand : ICommand
     {
-        private readonly PlayerMovement2_5D movement;
+        private readonly PlayerMovement movement;
 
-        public JumpCommand(PlayerMovement2_5D movement)
+        public JumpCommand(PlayerMovement movement)
         {
             this.movement = movement;
         }
 
         public void Execute()
         {
-            movement.Jump();
+            movement.ApplyJump();
         }
     }
 }
