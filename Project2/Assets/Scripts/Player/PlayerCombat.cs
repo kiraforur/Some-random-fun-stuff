@@ -11,30 +11,29 @@ namespace Player
         [SerializeField] private AttackData[] groundAttacks;
         [SerializeField] private AttackData airAttack;
 
+
         
         public ComboManager comboManager;
-        public event Action<AttackData> OnAttackPerformed;
+        public event Action OnAttackFinished;
+        
 
         public SuperMoveController superMove;
         private Hitbox hitbox;
 
         private void Awake()
         {
-            var combos = BuildCombos();
-            comboManager = new ComboManager(combos);
-
-           
+            comboManager = new ComboManager();
         }
 
-        private Dictionary<AttackContext, ComboString> BuildCombos()
+        public void OnAnimationFinished()
         {
-            var dict = new Dictionary<AttackContext, ComboString>();
-
-            dict[AttackContext.Ground] = new ComboString(groundAttacks);
-
-            return dict;
+            OnAttackFinished?.Invoke();
         }
-
+       
+        public void PerformAttack()
+        {
+            Debug.Log("ATTACK!");
+        }
         
 
         private void Update()

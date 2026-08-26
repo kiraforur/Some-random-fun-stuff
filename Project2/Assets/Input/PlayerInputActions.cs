@@ -189,7 +189,7 @@ namespace Input
                 {
                     ""name"": """",
                     ""id"": ""15e8d8f6-b4b1-42d8-ac71-e2cf9b78621a"",
-                    ""path"": """",
+                    ""path"": ""<Keyboard>/j"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -200,7 +200,7 @@ namespace Input
                 {
                     ""name"": """",
                     ""id"": ""54c2ed53-2b6f-4ebb-a26f-d711ad3c8c6a"",
-                    ""path"": """",
+                    ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

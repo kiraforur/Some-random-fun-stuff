@@ -1,8 +1,11 @@
-using UnityEngine;
-using UnityEngine.InputSystem;
 using Command;
 using Input;
 using Player;
+using State;
+using System;
+using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.Windows;
 
 namespace Core 
 {
@@ -10,39 +13,60 @@ namespace Core
     {
         [SerializeField] private PlayerController player;
         private PlayerInputActions inputActions;
-        void Awake()
+
+        public PlayerInputActions InputActions => inputActions;
+
+        private void Awake()
         {
             inputActions = new PlayerInputActions();
         }
 
-        void OnEnable()
+        private void OnEnable()
         {
-            inputActions.Enable();
-
-            /*inputActions.Player.Attack.performed += _ =>
-                Execute(new AttackCommand(player.Combat));*/
-
-            inputActions.Player.Jump.performed += _ =>
-                Execute(new JumpCommand(player.Movement));
-
-            inputActions.Player.Super.performed += _ =>
-               Execute(new SuperCommand(player.SuperMove));
+            
+            inputActions?.Enable();
+            inputActions.Player.Move.started += OnMoveStarted;
+            inputActions.Player.Jump.performed += OnJumpPerformed;
+            inputActions.Player.Super.performed += OnSuperPerformed;
+            inputActions.Player.Attack.performed += OnAttackPerformed;
         }
 
         private void OnDisable()
         {
-            inputActions.Disable();
+            inputActions.Player.Move.started -= OnMoveStarted;
+            inputActions.Player.Jump.performed -= OnJumpPerformed;
+            inputActions.Player.Super.performed -= OnSuperPerformed;
+            inputActions.Player.Attack.performed -= OnAttackPerformed;
+            inputActions?.Disable();
         }
-        
-        void Update()
+
+        private void OnJumpPerformed(InputAction.CallbackContext ctx)
         {
-            Vector2 move = inputActions.Player.Move.ReadValue<Vector2>();
-            Execute(new MoveCommand(player.Movement, move));
+           Execute(new JumpCommand(player.Movement));
+        }
+
+        private void OnSuperPerformed(InputAction.CallbackContext ctx)
+        {
+           Execute(new SuperCommand(player.SuperMove));
+        }
+
+        private void OnAttackPerformed(InputAction.CallbackContext ctx)
+        {
+            Execute(new AttackCommand());
+        }
+
+        private void OnMoveStarted(InputAction.CallbackContext ctx)
+        {
+            if (player != null)
+            {
+                var locomotionState = player.GetCurrentState() as LocomotionState;
+                locomotionState?.OnMovePerformed(ctx.ReadValue<Vector2>().x);
+            }
         }
 
         private void Execute(ICommand command)
         {
-            command.Execute();
+            player.HandleCommand(command);
         }
     }
 }
