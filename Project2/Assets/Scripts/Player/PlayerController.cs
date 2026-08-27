@@ -7,6 +7,8 @@ namespace Player
     public class PlayerController : MonoBehaviour
     {
         private IState _currState;
+
+        public Animator Animator { get; private set; }
         public PlayerMovement Movement { get; private set; }
         public PlayerCombat Combat { get; private set; }
         public SuperMoveController SuperMove { get; private set; }
@@ -19,6 +21,7 @@ namespace Player
             Combat = GetComponent<PlayerCombat>();
             SuperMove = GetComponent<SuperMoveController>();
             Input = GetComponent<InputHandler>();
+            Animator = GetComponent<Animator>();
         }
 
         private void Start()
