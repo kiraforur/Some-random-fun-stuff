@@ -18,6 +18,7 @@ namespace State
         public LocomotionState(PlayerController player) : base(player) { }
 
         public override void Enter() {
+            player.Animator.Play("Idle");
         }
 
         public override void Exit() { 
@@ -25,21 +26,7 @@ namespace State
 
         public override void LogicUpdate() {
             _moveInput = player.Input.InputActions.Player.Move.ReadValue<Vector2>();
-
-            
-            /*if (_moveInput == Vector2.zero)
-            {
-                _isRunning = false;
-                _lastInputX = 0f;
-            }
-            else if (!_isRunning)
-            {
-                
-                if (Mathf.Abs(_moveInput.x) > 0.1f && Sign(_moveInput.x) != Sign(_lastInputX))
-                {
-                    _isRunning = false;
-                }
-            }*/
+            //player.Animator.Play();
         }
 
         private int Sign(float value)
