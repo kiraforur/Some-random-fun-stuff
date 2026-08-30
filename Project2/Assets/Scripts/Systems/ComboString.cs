@@ -5,26 +5,26 @@ namespace Systems
 {
     public class ComboString
     {
-        [SerializeField] private AttackData[] attacks;
+        private AttackData[] attacks;
         private readonly float comboTime = 1f;
 
-        private int comboIndex = 0;
+        private int _comboIndex;
         private float timer;
 
         public ComboString(AttackData[] attacks)
         {
             this.attacks = attacks;
-            comboIndex = 0;
+            _comboIndex = 0;
         }
         public AttackData GetNextAttack()
         {
             timer = comboTime;
 
-            var attack = attacks[comboIndex];
+            AttackData attack = attacks[_comboIndex];
 
-            comboIndex++;
+            _comboIndex++;
 
-            if (comboIndex >= attacks.Length)
+            if (_comboIndex >= attacks.Length)
                 Reset();
 
             return attack;
@@ -43,7 +43,7 @@ namespace Systems
 
         public void Reset()
         {
-            comboIndex = 0;
+            _comboIndex = 0;
         }
     }
 }

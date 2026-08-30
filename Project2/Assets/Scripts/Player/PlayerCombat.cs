@@ -8,8 +8,8 @@ namespace Player
     public class PlayerCombat : MonoBehaviour
     {
         [Header("Combos")]
-        [SerializeField] private AttackData[] groundAttacks;
-        [SerializeField] private AttackData airAttack;
+        [SerializeField] private AttackData[] _groundAttacks;
+        private ComboString _comboString;
 
 
         
@@ -18,11 +18,12 @@ namespace Player
         
 
         public SuperMoveController superMove;
-        private Hitbox hitbox;
+        //private Hitbox hitbox;
 
         private void Awake()
         {
             comboManager = new ComboManager();
+            _comboString = new ComboString(_groundAttacks);
         }
 
         public void OnAnimationFinished()
@@ -30,11 +31,21 @@ namespace Player
             OnAttackFinished?.Invoke();
         }
        
-        public void PerformAttack()
+        public AttackData PerformAttack()
         {
             Debug.Log("ATTACK!");
+
+            AttackData attack = _comboString.GetNextAttack();
+            Debug.Log($"{attack.AnimationName}");
+
+            return attack;
         }
-        
+
+        public void Reset()
+        {
+            _comboString.Reset();
+        }
+
 
         private void Update()
         {
