@@ -1,7 +1,8 @@
+using Buttons;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections.Generic;
-using System;
 
 
 public class GameController : MonoBehaviour
@@ -12,12 +13,17 @@ public class GameController : MonoBehaviour
     private int currRound = 1;
     private BoardState boardState;
 
+    [SerializeField] private LocationSelectionController locationSelectionController;
+
     [SerializeField] private Button nextTurnButton;
+    [SerializeField] private MoveButton moveButton;
     private void Start()
     {
         CreatePlayersWithRandomRoles();
 
         turnManager = new TurnManager(players);
+
+        moveButton.OnButtonClicked += HandleGameButton;
 
         StartGame();
     }
@@ -75,8 +81,12 @@ public class GameController : MonoBehaviour
     private void StartTurn()
     {
         Player player = turnManager.Current;
+        player.StartTurn(currRound);
 
-        Debug.Log($"This is Player {player.Id}'s turn.");
+        Debug.Log(
+        $"This is Player {player.Id}'s turn. " +
+        $"Actions: {player.RemainingActions}");
+
         MakeAction();
     }
 
@@ -158,6 +168,59 @@ public class GameController : MonoBehaviour
                 LocationType.Citadel));
 
         return board;
+    }
+
+    public void TryMoveCurrentPlayer()
+    {
+        Player player = turnManager.Current;
+
+        LocationView selectedView = locationSelectionController.SelectedLocation;
+
+        if (selectedView == null)
+        {
+            Debug.Log("Сначала выберите локацию.");
+            return;
+        }
+
+        Location destination = boardState.GetLocation(selectedView.LocationId);
+
+        if (player.CurrentLocation == destination)
+        {
+            Debug.Log(
+                $"Player {player.Id} already is in {destination.Name}.");
+            return;
+        }
+
+        if (!player.TrySpendAction())
+        {
+            Debug.Log(
+                $"Player {player.Id} has no actions remaining.");
+            return;
+        }
+
+        player.MoveTo(destination);
+
+        Debug.Log(
+            $"Player {player.Id} moved to {destination.Name}. " +
+            $"Actions left: {player.RemainingActions}");
+    }
+
+    private void HandleGameButton(ActionType actionType)
+    {
+        switch (actionType)
+        {
+            case ActionType.Move:
+                TryMoveCurrentPlayer();
+                break;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (moveButton != null)
+        {
+            moveButton.OnButtonClicked -= HandleGameButton;
+        }
     }
 }
 

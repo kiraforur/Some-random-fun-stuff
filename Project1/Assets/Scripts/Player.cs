@@ -8,7 +8,8 @@ public class Player
 
     public int Gold { get; private set; }
 
-    
+    public int RemainingActions { get; private set; }
+    public Location CurrentLocation { get; private set; }
     public int Score { get; private set; }
 
     public Player(int id, RoleType role)
@@ -40,5 +41,27 @@ public class Player
 
         Score += amount;
     }
+
+    public void MoveTo(Location location)
+    {
+        CurrentLocation = location;
+    }
+
+    public bool TrySpendAction()
+    {
+        if (RemainingActions <= 0)
+        {
+            return false;
+        }
+
+        RemainingActions--;
+        return true;
+    }
+
+    public void StartTurn(int act_count) 
+    {
+        RemainingActions = act_count;
+    }
+
 }
 
