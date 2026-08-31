@@ -4,5 +4,6 @@ public enum ActionType
 {
    Attack, 
    Next,
-   Buy
+   Buy , 
+   Move
 }

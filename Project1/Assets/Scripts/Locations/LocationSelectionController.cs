@@ -6,6 +6,7 @@ public class LocationSelectionController : MonoBehaviour
     private LocationView[] locations;
 
     private LocationView selectedLocation;
+    public LocationView SelectedLocation => selectedLocation;
 
     private void Start()
     {
