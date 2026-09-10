@@ -32,6 +32,22 @@ public static class LocationFactory
                     new CitadelEffect()
                 );
 
+            case LocationType.MainSquire:
+                return new Location(
+                    id, "MainSquire", type, new MainSquireEffect());
+
+            case LocationType.Ghetto:
+                return new Location(
+                    id, "Ghetto", type, new GhettoEffect());
+
+            case LocationType.Sanctuary:
+                return new Location(
+                    id, "Sanctuary", type, new SanctuaryEffect());
+
+            case LocationType.NobleQuarter:
+                return new Location(
+                    id, "NobleQuarter", type, new NobleQuarterEffect());
+
             default:
                 throw new System.ArgumentOutOfRangeException(
                     nameof(type),

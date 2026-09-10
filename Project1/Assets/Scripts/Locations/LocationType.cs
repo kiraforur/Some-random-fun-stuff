@@ -3,5 +3,10 @@ public enum LocationType
 {
     Port,
     Market,
-    Citadel
+    Citadel,
+    MainSquire,
+    Sanctuary ,
+    NobleQuarter ,
+    Ghetto
+
 }
