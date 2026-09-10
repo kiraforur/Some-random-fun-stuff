@@ -153,19 +153,25 @@ public class GameController : MonoBehaviour
         BoardState board = new BoardState();
 
         board.AddLocation(
-            LocationFactory.Create(
-                0,
-                LocationType.Port));
+            LocationFactory.Create(0,LocationType.Port));
 
         board.AddLocation(
-            LocationFactory.Create(
-                1,
-                LocationType.Market));
+            LocationFactory.Create(1,LocationType.Market));
 
         board.AddLocation(
-            LocationFactory.Create(
-                2,
-                LocationType.Citadel));
+            LocationFactory.Create(2,LocationType.Citadel));
+
+        board.AddLocation(
+            LocationFactory.Create(3, LocationType.Sanctuary));
+
+        board.AddLocation(
+            LocationFactory.Create(4, LocationType.MainSquire));
+
+        board.AddLocation(
+            LocationFactory.Create(5, LocationType.Ghetto));
+
+        board.AddLocation(
+            LocationFactory.Create(6, LocationType.NobleQuarter));
 
         return board;
     }
