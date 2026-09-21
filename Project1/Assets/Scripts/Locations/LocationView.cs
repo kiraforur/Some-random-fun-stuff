@@ -7,6 +7,13 @@ public class LocationView : MonoBehaviour,
     IPointerEnterHandler,
     IPointerExitHandler
 {
+
+    [SerializeField]
+    private Transform cameraPoint;
+
+    [SerializeField]
+    private Transform uiAnchor;
+
     [SerializeField]
     private int locationId;
 
@@ -27,6 +34,9 @@ public class LocationView : MonoBehaviour,
 
     public int LocationId => locationId;
     public string LocationName => locationName;
+
+    public Transform CameraPoint => cameraPoint;
+    public Transform UIAnchor => uiAnchor;
 
     public event Action<LocationView> Clicked;
 
