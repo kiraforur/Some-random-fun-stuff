@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class PlayerCameraController : MonoBehaviour
@@ -96,7 +97,7 @@ public class PlayerCameraController : MonoBehaviour
             float progress = Mathf.Clamp01(
                 elapsedTime / transitionDuration);
 
-            // Делает начало и конец движения более плавными.
+            
             float smoothProgress =
                 progress * progress * (3f - 2f * progress);
 
@@ -119,4 +120,33 @@ public class PlayerCameraController : MonoBehaviour
 
         transitionRoutine = null;
     }
+
+    public void MoveToPoint(Transform point, bool instantly = false)
+    {
+        if (point == null)
+        {
+            Debug.LogError("Не передана точка для перемещения камеры.");
+            return;
+        }
+
+        if (transitionRoutine != null)
+        {
+            StopCoroutine(transitionRoutine);
+            transitionRoutine = null;
+        }
+
+        if (instantly || transitionDuration <= 0f)
+        {
+            transform.SetPositionAndRotation(
+                point.position,
+                point.rotation);
+
+            return;
+        }
+
+        transitionRoutine = StartCoroutine(
+            MoveToViewPoint(point));
+    }
+
+
 }

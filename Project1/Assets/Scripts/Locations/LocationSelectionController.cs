@@ -8,6 +8,8 @@ public class LocationSelectionController : MonoBehaviour
     private LocationView selectedLocation;
     public LocationView SelectedLocation => selectedLocation;
 
+    public event System.Action<LocationView> LocationSelected;
+
     private void Start()
     {
         foreach (LocationView location in locations)
@@ -29,6 +31,7 @@ public class LocationSelectionController : MonoBehaviour
 
     private void OnLocationClicked(LocationView location)
     {
+        Debug.Log($"[1] Clicked location: {location.LocationName}");
         if (selectedLocation != null)
         {
             selectedLocation.SetSelected(false);
@@ -38,9 +41,13 @@ public class LocationSelectionController : MonoBehaviour
 
         selectedLocation.SetSelected(true);
 
+        Debug.Log("[2] Invoking LocationSelected");
+
         Debug.Log(
             $"Selected: {selectedLocation.LocationName} " +
             $"({selectedLocation.LocationId})"
         );
+
+        LocationSelected?.Invoke(selectedLocation);
     }
 }
