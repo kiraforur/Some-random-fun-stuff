@@ -9,6 +9,7 @@ namespace Player
 
         [SerializeField] private int maxSuper = 100;
         public int damage;
+
         
         /*public Animator animator;
         public GameObject superEffectPrefab;
