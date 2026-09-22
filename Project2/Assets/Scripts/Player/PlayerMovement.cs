@@ -8,6 +8,7 @@ namespace Player
         private MovementProcessor _processor;
         private Rigidbody _rg;
         private BoxCollider _collider;
+        
 
         private void Awake()
         {
@@ -23,13 +24,13 @@ namespace Player
         
         public void ApplyJump()
         {
-            if (isGrounded())
+            if (IsGrounded())
             {
                 _rg.linearVelocity = new Vector3(_rg.linearVelocity.x, _processor.GetJumpVelocity(), _rg.linearVelocity.z);
             }
         }
 
-        private bool isGrounded() {
+        public bool IsGrounded() {
             float rayLength = (_collider.size.y / 2f) + 0.1f;
 
             return Physics.Raycast(_collider.bounds.center, Vector3.down, rayLength);

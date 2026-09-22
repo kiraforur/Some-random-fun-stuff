@@ -15,7 +15,8 @@ namespace Core
         private PlayerInputActions inputActions;
 
         public PlayerInputActions InputActions => inputActions;
-
+        public Vector2 MoveInput =>
+            InputActions.Player.Move.ReadValue<Vector2>();
         private void Awake()
         {
             inputActions = new PlayerInputActions();
@@ -42,7 +43,7 @@ namespace Core
 
         private void OnJumpPerformed(InputAction.CallbackContext ctx)
         {
-           Execute(new JumpCommand(player.Movement));
+           Execute(new JumpCommand());
         }
 
         private void OnSuperPerformed(InputAction.CallbackContext ctx)
