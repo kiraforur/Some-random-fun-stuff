@@ -48,7 +48,7 @@ namespace Core
 
         private void OnSuperPerformed(InputAction.CallbackContext ctx)
         {
-           Execute(new SuperCommand(player.SuperMove));
+           Execute(new SuperCommand());
         }
 
         private void OnAttackPerformed(InputAction.CallbackContext ctx)

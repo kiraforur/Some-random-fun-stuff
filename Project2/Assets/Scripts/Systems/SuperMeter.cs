@@ -22,14 +22,10 @@ namespace Systems
             OnMeterChanged?.Invoke((float)CurrMeter / Max);
         }
 
-        public bool Activate()
+        public void Reset()
         {
-            if (CurrMeter != Max)
-                return false;
-
             CurrMeter = 0;
-            OnMeterChanged?.Invoke(0);
-            return true;
+            OnMeterChanged?.Invoke((float)CurrMeter);
         }
     }
 }

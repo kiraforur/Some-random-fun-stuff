@@ -6,7 +6,7 @@ using Core;
 
 namespace State
 {
-    class LocomotionState : PlayerBaseState
+    public class LocomotionState : PlayerBaseState
     {
         private bool _isRunning = false;
         private Vector2 _moveInput;
@@ -20,6 +20,9 @@ namespace State
         public LocomotionState(PlayerController player) : base(player) { }
 
         public override void Enter() {
+            _isRunning = false;
+            _lastTapTime = 0f;
+            _lastInputX = 0;
             player.Animator.Play("Idle");
             _prevAnimtion = "Idle";
 
@@ -98,12 +101,19 @@ namespace State
         {
             if (command is AttackCommand)
             {
-                player.ChangeState(new AttackState(player));
+                player.ChangeState(player.AttackState);
                 return;
             }
             else if(command is JumpCommand)
             {
-                player.ChangeState(new JumpState(player)); return;
+                player.ChangeState(player.JumpState); return;
+            }
+            else if(command is SuperCommand)
+            {
+                if(player.SuperMove.CanActivateSuper() == true)
+                {
+                    player.ChangeState(player.SuperState); return;
+                }
             }
             else
             {

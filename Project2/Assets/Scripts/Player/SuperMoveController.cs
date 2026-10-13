@@ -1,5 +1,6 @@
 using UnityEngine;
 using Systems;
+using System;
 
 namespace Player 
 {
@@ -7,7 +8,7 @@ namespace Player
     {
         private SuperMeter meter;
 
-        [SerializeField] private int maxSuper = 100;
+        [SerializeField] private int maxSuper;
         public int damage;
 
         
@@ -15,6 +16,7 @@ namespace Player
         public GameObject superEffectPrefab;
         public AudioSource superSound;*/
         private Hitbox hitbox;
+        public event Action OnSuperFinished;
 
         void Awake()
         {
@@ -27,17 +29,19 @@ namespace Player
             meter.Add(10);
         }
 
-        public void ActivateSuper() 
+        public bool CanActivateSuper() 
         {
-            if (!meter.Activate())
-                return;
+            return meter.Max == meter.CurrMeter;
+        }
 
-            /*animator.SetTrigger("Super");*/
-           
-            /*superSound.Play();*/
-            
+        public void UseSuper()
+        {
+            meter.Reset();
+        }
 
-            hitbox.CheckHit(damage);
+        public void OnAnimationFinished()
+        {
+            OnSuperFinished?.Invoke();
         }
 
         public SuperMeter GetMeter() => meter;

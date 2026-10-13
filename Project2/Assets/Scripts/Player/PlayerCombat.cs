@@ -13,7 +13,7 @@ namespace Player
 
 
         
-        public ComboManager comboManager;
+        //public ComboManager comboManager;
         public event Action OnAttackFinished;
         
 
@@ -22,7 +22,7 @@ namespace Player
 
         private void Awake()
         {
-            comboManager = new ComboManager();
+            //comboManager = new ComboManager();
             _comboString = new ComboString(_groundAttacks);
         }
 
@@ -47,10 +47,10 @@ namespace Player
         }
 
 
-        private void Update()
+        /*private void Update()
         {
             comboManager.Tick(Time.deltaTime);
             
-        }
+        }*/
     }
 }

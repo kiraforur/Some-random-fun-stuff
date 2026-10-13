@@ -211,7 +211,7 @@ namespace Input
                 {
                     ""name"": """",
                     ""id"": ""70054490-d94c-4178-8951-91097ff5b48a"",
-                    ""path"": """",
+                    ""path"": ""<Keyboard>/k"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

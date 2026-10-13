@@ -24,19 +24,22 @@ namespace State
                 
                 AttackData data = player.Combat.PerformAttack();
                 player.Animator.Play(data.AnimationName);
+                player.SuperMove.AddToMeter();
             }
             else
             {
-                player.ChangeState(new LocomotionState(player));
+                player.ChangeState(player.LocomotionState);
             }
         }
 
         public override void Enter()
         {
+            _nextAttackRequested = false;
             player.Combat.OnAttackFinished += HandleAttackFinished;
             
             AttackData data = player.Combat.PerformAttack();
             player.Animator.Play(data.AnimationName);
+            player.SuperMove.AddToMeter();
         }
 
         public override void Exit()

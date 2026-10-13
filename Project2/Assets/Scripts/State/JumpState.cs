@@ -25,7 +25,7 @@ namespace State
             if (player.Movement.IsGrounded() == false) { _hasLeftTheGround = true; }
             if(player.Movement.IsGrounded() == true && _hasLeftTheGround)
             {
-                player.ChangeState(new LocomotionState(player));
+                player.ChangeState(player.LocomotionState);
             }
 
             
