@@ -15,4 +15,6 @@ MonoBehaviour:
   damage: 4
   animationName: Attack1
   animation: {fileID: 7400000, guid: c8f557b206c70e84aa98815bcb8f9eb5, type: 2}
+  hitSize: {x: 3, y: 2, z: 2}
+  hitOffset: {x: 1.5, y: 0, z: 0}
   _frameWindow: 4

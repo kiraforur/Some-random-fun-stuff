@@ -48,11 +48,13 @@ namespace State
                 _currAnimation = "Walk";
             }
 
-            if (_moveInput.x > 0)
+            player.Movement.UpdateFacing(_moveInput.x);
+
+            if (player.Movement.Facing > 0)
             {
                 _spriteRenderer.flipX = false;
             }
-            else if (_moveInput.x < 0)
+            else if (player.Movement.Facing < 0)
             {
                 _spriteRenderer.flipX = true;
             }

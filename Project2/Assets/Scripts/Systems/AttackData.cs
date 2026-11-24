@@ -6,11 +6,14 @@ public class AttackData : ScriptableObject
     [SerializeField] private int damage;
     [SerializeField] private string animationName;
     [SerializeField] private AnimationClip animation;
+    [SerializeField] private Vector3 hitSize;
+    [SerializeField] private Vector3 hitOffset;
     [SerializeField] private float _frameWindow;
     
 
     public int Damage => damage;
     public float FrameWindow => _frameWindow;
     public string AnimationName => animationName;
-    
+    public Vector3 HitSize => hitSize;
+    public Vector3 HitOffset => hitOffset;
 }

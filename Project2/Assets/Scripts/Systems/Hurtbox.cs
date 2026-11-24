@@ -17,6 +17,7 @@ namespace Systems
         public void TakeDamage(int damage) 
         {
             owner?.TakeDamage(damage);
+            Debug.Log("Took damage!");
         }
     }
 

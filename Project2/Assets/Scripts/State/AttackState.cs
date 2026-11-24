@@ -2,6 +2,7 @@ using UnityEngine;
 using Player;
 using Core;
 using Command;
+using Systems;
 
 namespace State
 {
@@ -22,9 +23,10 @@ namespace State
             {
                 _nextAttackRequested = false;
                 
-                AttackData data = player.Combat.PerformAttack();
+                AttackData data = player.Combat.PerformAttack(player.Movement.Facing);
                 player.Animator.Play(data.AnimationName);
                 player.SuperMove.AddToMeter();
+                player.Combat.ClearHash();
             }
             else
             {
@@ -36,10 +38,10 @@ namespace State
         {
             _nextAttackRequested = false;
             player.Combat.OnAttackFinished += HandleAttackFinished;
-            
-            AttackData data = player.Combat.PerformAttack();
+            AttackData data = player.Combat.PerformAttack(player.Movement.Facing);
             player.Animator.Play(data.AnimationName);
             player.SuperMove.AddToMeter();
+            player.Combat.ClearHash();
         }
 
         public override void Exit()
