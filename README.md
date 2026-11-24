@@ -25,7 +25,7 @@ A playable prototype demonstrating a vertical slice of a classic beat’em-up ga
   
 ### Active Work
 * Implemented core physics-based movement, double-tap running, gravity-tuned jumping, a functional ComboString and non-looping animation transitions in the Unity Animator linked to player input.
-* **Current Focus:** I am currently working on implementing a "Super Attack" (Special Move) mechanic, including its resource management, unique animation states, and area-of-effect (AoE) hitboxes.
+* **Current Focus:** I am currently working on implementing an InputBuffer to properly handle incoming inputs and starting to develop hitboxes and hurtboxes.
 
 ---
 
